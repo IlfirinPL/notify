@@ -26,8 +26,10 @@ then
   echo "${KEY}" > ~/.notifyreg
 else
   KEY=`cat ~/.notifyreg`
-  curl \
-  "https://appnotify.herokuapp.com/notify?to=${KEY}&text=${TEXT}" \
+  curl -G \
+  "https://appnotify.herokuapp.com/notify" \
+  --data-urlencode "to=${KEY}" \
+  --data-urlencode "text=${TEXT}" \
   > /dev/null
 
   echo "[notify] Successfully sent notification."
